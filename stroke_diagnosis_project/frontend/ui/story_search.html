@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê Chẩn đoán</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/frontend/css/search_story.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2> Diagnostic statistics</h2>
+        <div class="image-slider">
+            <div class="slides">
+                <div class="slide"><img src="/backend/uploads/imageweb/slider7.jpg" alt="Slide 1"></div>
+                <div class="slide"><img src="/backend/uploads/imageweb/slider2.jpg" alt="Slide 2"></div>
+                <div class="slide"><img src="/backend/uploads/imageweb/slider3.jpg" alt="Slide 3"></div>
+            </div>
+            <!-- Nút điều hướng -->
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <!-- Form lọc ngày và loại bệnh -->
+        <form method="POST" action="/statistics">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="start_date">Date start:</label>
+                    <input type="date" id="start_date" name="start_date" class="form-control" value="{{ start_date }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="end_date">Date end:</label>
+                    <input type="date" id="end_date" name="end_date" class="form-control" value="{{ end_date }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="predicted_label">Categories predic:</label>
+                    <select id="predicted_label" name="predicted_label" class="form-control">
+                        <option value="">Choose disease type</option>
+                        {% for label in labels %}
+                        <option value="{{ label }}" {% if label == selected_label %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="submit-button" type="submit" class="btn btn-primary" style="margin-top: 30px;">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Thống kê tổng số trường hợp -->
+        <h3>Total number of cases: {{ total_cases }}</h3>
+
+        <!-- Thống kê theo ngày -->
+        <h4>Statistics by day</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Number of cases</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in daily_statistics %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+        <!-- Lưu trữ dữ liệu cho biểu đồ vào thuộc tính data-* -->
+        <div id="chartData" 
+             data-labels="{{ labels | tojson }}" 
+             data-counts="{{ counts | tojson }}"></div>
+
+        <script>
+            let currentSlide = 0;
+    
+            function moveSlide(direction) {
+                const slides = document.querySelector('.slides');
+                const totalSlides = slides.children.length;
+
+                // Cập nhật vị trí slide hiện tại
+                currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+
+                // Di chuyển slider
+                slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            // Tự động chuyển slide
+            setInterval(() => {
+                moveSlide(1); // Chuyển đến slide tiếp theo
+            }, 5000); // 5 giây
+
+
+            // Lấy dữ liệu cho biểu đồ "labelChart"
+            var chartData = document.getElementById('chartData');
+            var labels = JSON.parse(chartData.getAttribute('data-labels'));
+            var counts = JSON.parse(chartData.getAttribute('data-counts'));
+
+            // Biểu đồ tròn cho loại chẩn đoán - Biểu đồ thứ nhất
+            var ctx = document.getElementById('labelChart').getContext('2d');
+            var labelChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,  // labels từ Flask
+                    datasets: [{
+                        label: 'Số lượng trường hợp',
+                        data: counts,  // counts từ Flask
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+
+            // Biểu đồ tròn thứ hai - Ví dụ (có thể là một biểu đồ thống kê khác)
+            var ctx2 = document.getElementById('labelChart2').getContext('2d');
+            var labelChart2 = new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: labels,  // labels từ Flask
+                    datasets: [{
+                        label: 'Số lượng trường hợp (Biểu đồ thứ hai)',
+                        data: counts,  // counts từ Flask
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+
+        </script>
+    </div>
+</body>
+</html>

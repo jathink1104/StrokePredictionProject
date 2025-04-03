@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontend/css/dataset_stoke.css">
+    <title>Image Gallery</title>
+</head>
+<body>
+    <h2>Image Gallery</h2>
+    <div class="image-slider">
+        <div class="slides">
+            <div class="slide"><img src="/backend/uploads/imageweb/slider5.jpg" alt="Slide 1"></div>
+            <div class="slide"><img src="/backend/uploads/imageweb/slider6.jpg" alt="Slide 2"></div>
+            <div class="slide"><img src="/backend/uploads/imageweb/slider7.jpg" alt="Slide 3"></div>
+        </div>
+        <!-- Nút điều hướng -->
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    <div class="image-gallery">
+        {% for image_file in image_files %}
+            <img src="{{ url_for('get_uploaded_file', filename=image_file) }}" alt="Image" class="image-thumbnail">
+        {% endfor %}
+    </div>
+    <script>
+        let currentSlide = 0;
+        
+        function moveSlide(direction) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = slides.children.length;
+
+            // Cập nhật vị trí slide hiện tại
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+
+            // Di chuyển slider
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Tự động chuyển slide
+        setInterval(() => {
+            moveSlide(1); // Chuyển đến slide tiếp theo
+        }, 5000); // 5 giây
+    </script>
+</body>
+</html>

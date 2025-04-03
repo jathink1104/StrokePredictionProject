@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Stroke Diagnosis System</title>
+  <link rel="stylesheet" href="/frontend/css/login.css">
+  <link rel="stylesheet" href="/frontend/css/reset.css">
+  <link rel="stylesheet" href="/frontend/css/responsive.css">
+</head>
+<body>
+  <main>
+    <div class="inner-content">
+      <img class="img-auth-container" src="/backend/uploads/imageweb/xetnghiemyte.jpg" alt="ảnh đại diện đăng nhập">
+      <div class="auth-container">
+        <h2>Welcome to System Hospital</h2>
+        <p>Please log in to continue</p>
+
+        <!-- Form đăng nhập -->
+        <form id="login-form" class="auth-form" method="POST" action="/login">
+          <input type="text" name="username" placeholder="Username" required>
+          <input type="password" name="password" placeholder="Password" required>
+
+          <!-- Nút đăng nhập -->
+          <button type="submit">Login</button>
+
+          <!-- Hiển thị lỗi nếu thông tin đăng nhập sai -->
+          {% if error %}
+            <p class="error-message" style="color: red;">{{ error }}</p>
+          {% endif %}
+        </form>
+
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/frontend/js/script.js"></script>
+</body>
+</html>

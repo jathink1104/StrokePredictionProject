@@ -1,0 +1,138 @@
+/* Đặt lại các thuộc tính mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  /* Header */
+  header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #1c3743;
+    color: #fff;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+  }
+  
+  /* Navigation */
+  nav {
+    background-color: #1c3743;
+    padding: 10px 0;
+    margin: 20px 0;
+    border-radius: 5px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  nav li {
+    margin: 0 15px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  nav a:hover {
+    background-color: #f4f4f4;
+    color: #1c3743;
+    border-radius: 5px;
+  }
+  
+  /* Main Content */
+  main {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  section h2 {
+    font-size: 1.8rem;
+    color: #1c3743;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #1c3743;
+    padding-bottom: 5px;
+  }
+  
+  section p, section ul {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  ul {
+    list-style: disc inside;
+    padding-left: 20px;
+  }
+  
+  /* Doctor Profiles */
+  .doctor {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .doctor:hover {
+    transform: translateY(-5px);
+  }
+  
+  .doctor img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #1c3743;
+  }
+  
+  .doctor h3 {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .doctor p {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #777;
+    border-top: 1px solid #ddd;
+  }
+  
+  

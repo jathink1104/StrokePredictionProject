@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontend/css/dataset_stoke.css">
+    <title>Image Gallery</title>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <div class="image-gallery">
+        {% for image_file in image_files %}
+            <img src="{{ url_for('get_uploaded_file', filename=image_file) }}" alt="Image" class="image-thumbnail">
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #1f3a4c;
+}
+
+.submit-button{
+    background-color: #1f3a4c;
+    color: white;
+    border-radius: 5px;
+}
+
+h3, h4 {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #495057;
+}
+
+form {
+    padding: 15px;
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: 500;
+    color: #495057;
+}
+
+form button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.table {
+    margin-top: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+    background-color: #1f3a4c;
+    color: white;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+canvas {
+    margin-top: 15px;
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    margin-top: 50px;
+    max-width: 900px;
+}
+
+/* Nút bấm hover */
+.btn-primary:hover {
+    background-color: #1f3a4c;
+    border-color: #1f3a4c;
+    transition: all 0.3s ease;
+}
+
+/* Form input focus */
+input[type="date"], select {
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s;
+}
+
+input[type="date"]:focus, select:focus {
+    border-color: #1f3a4c;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Bảng màu biểu đồ */
+.chartjs-render-monitor {
+    padding: 10px;
+}
+
+
+/*slider*/
+.image-slider {
+    position: relative;
+    height: 485px;
+    width: 100%;
+  
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slide {
+    min-width: 100%;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .slide img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    z-index: 10;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  

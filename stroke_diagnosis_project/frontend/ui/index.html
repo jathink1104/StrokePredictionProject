@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Diagnosis Interface</title>
+    <link rel="stylesheet" href="/frontend/css/index.css">
+    <link rel="stylesheet" href="/frontend/css/login.css">
+    <link rel="stylesheet" href="/frontend/css/reset.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Stroke Diagnosis</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." />
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="javascript:void(0);" id="openModal">Information Hospital</a></li>
+                <li><a href="javascript:void(0);" id="openModal-2">System Setup</a></li>
+                <li><a href="javascript:void(0);" id="openModal-3">Image</a></li>
+                <li><a href="javascript:void(0);" id="openModal-4">Story Search</a></li>
+                <li><a href="javascript:void(0);" id="openModal-5">Story Results</a></li>
+                <li><a href="javascript:void(0);" id="openModal-6">Dataset Stoke</a></li>
+            </ul>
+        </div>
+         <!--modal information hospital-->
+         <div class="modal-page" id="infoModal">
+            <div class="modal-content-1" id="modalContent-1">
+                <span class="close-modal-1" id="closeModal">&times;</span>
+                <iframe src="/frontend/ui/information_hospital.html" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+            </div>
+        </div>
+
+        <!--modal System setup-->
+        <div class="modal-page" id="infoModal-Systemsetup">
+            <div class="modal-content-1" id="modalContent-2">
+                <span class="close-modal-1" id="closeModal-2">&times;</span>
+                <iframe src="system_setup.html" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+            </div>
+        </div>
+        <!--modal image story -->
+        <div class="modal-page" id="infoModal-ImageStory">
+            <div class="modal-content-1" id="modalContent-3">
+                <span class="close-modal-1" id="closeModal-3">&times;</span>
+                <iframe src="/show_images" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+            </div>
+        </div>
+        <!--modal image story -->
+        <div class="modal-page" id="infoModal-StorySearch">
+            <div class="modal-content-1" id="modalContent-4">
+                <span class="close-modal-1" id="closeModal-4">&times;</span>
+                <iframe src="/statistics" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+            </div>
+        </div>
+        <!--modal story result -->
+        <div class="modal-page" id="infoModal-Storyresult">
+            <div class="modal-content-1" id="modalContent-5">
+                <span class="close-modal-1 close-result" id="closeModal-5">&times;</span>
+                <iframe src="/results" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+            </div>
+        </div>
+        <!--modal dataset stoke -->
+        <div class="modal-page" id="infoModal-DatasetStoke">
+            <div class="modal-content-1" id="modalContent-6">
+                <span class="close-modal-1" id="closeModal-6">&times;</span>
+                <iframe src="/show_images" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="main-content">
+            
+            <div class="main-content-wrap">
+                
+              <h1>Stroke Diagnosis System</h1>
+              <p>Please upload an image for stroke diagnosis.</p>
+          
+              <!-- Upload Section -->
+              <div class="upload-section">
+                
+                    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/predict">
+                        <label class="lable-title" for="patientName">Patient Name</label>
+                        <input class="input-title" type="text" id="patientName" name="patient_name" placeholder="Enter patient's name" required>
+                
+                        <label class="lable-title"  for="patientEmail">Email</label>
+                        <input class="input-title" type="email" id="patientEmail" name="email" placeholder="Enter email" required>
+                
+                        <label class="lable-title"  for="patientPhone">Phone Number</label>
+                        <input class="input-title" type="text" id="patientPhone" name="phone_number" placeholder="Enter phone number" required>
+                
+                        <input type="file" id="fileInput" name="file" accept="image/*" required>
+                        <button type="submit">Diagnose</button>
+                    </form>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+            </div>
+          </div>
+
+        <!-- Modal -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal-result">&times;</span>
+                <h3>Diagnosis Result</h3>
+                <p><strong>Prediction:</strong> <span id="prediction"></span></p>
+                <p><strong>Confidence:</strong> <span id="confidence"></span></p>
+                <h4>Original Image</h4>
+                <img id="uploadedImage" alt="Uploaded Image">
+                <h4>Grad-CAM Visualization</h4>
+                <img id="gradCamImage" alt="Grad-CAM Image">
+                <h4 id="overlayTitle" style="display: none;">Affected Region</h4>
+                <img class="overlayImage-class" id="overlayImage" style="display: none;" alt="Overlay Image">
+            </div>
+        </div>
+        
+        
+        <div class="admin-section">
+            <button class="share-button">Share</button>
+            <img src="/backend/uploads/imageweb/logo-benh-vien.jpg" alt="Admin Avatar" class="admin-avatar" id="avatar">
+            
+            <!-- Dropdown Menu -->
+            <div id="avatarDropdown" class="dropdown-menu">
+                <ul>
+                    <a href="">
+                        <li>My plan</li>
+                    </a>
+                    <a href="">
+                        <li>My Systems</li>
+                    </a>
+                    <a href="">
+                        <li>Customize</li>
+                    </a>
+                    <a href="">
+                        <li>Settings</li>
+                    </a>
+                    <a href="">
+                        <li>Getsearch extension</li>
+                    </a>
+                    <a href="{{ url_for('logout') }}">
+                        <li>Log out</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+    
+        function moveSlide(direction) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = slides.children.length;
+    
+            // Cập nhật vị trí slide hiện tại
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+    
+            // Di chuyển slider
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    
+        // Tự động chuyển slide
+        setInterval(() => {
+            moveSlide(1); // Chuyển đến slide tiếp theo
+        }, 5000); // 5 giây
+    </script>
+
+
+
+    <script src="/frontend/js/script.js"></script>
+</body>
+</html>
